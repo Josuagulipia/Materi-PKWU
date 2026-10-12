@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Misi Kerajinan: Dari Bahan Jadi Karya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FAF6F0; --surface:#FFFFFF; --surface-2:#F1EAE0;
+  --ink:#2B241E; --ink-soft:#6B6055;
+  --wood:#8A5A3B; --wood-dark:#6B4429;
+  --moss:#3D6B57; --moss-dark:#2C4E40; --moss-light:#E4EFE9;
+  --amber:#C97A3D; --amber-dark:#A85F28; --amber-light:#F6E3D0;
+  --sky:#4A7A96; --sky-light:#E1EDF2;
+  --danger:#B4483A; --danger-light:#F7E1DD;
+  --line:#E5DCCF;
+  --radius:18px;
+  --font-head:"Fraunces",Georgia,serif;
+  --font-body:"Inter",system-ui,sans-serif;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#211C17; --surface:#2B241E; --surface-2:#332B23;
+    --ink:#F3ECE2; --ink-soft:#B8AB9B;
+    --moss-light:#25352E; --amber-light:#3A2D1F; --sky-light:#22333B; --danger-light:#3A2420;
+    --line:#463B30;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#211C17; --surface:#2B241E; --surface-2:#332B23;
+  --ink:#F3ECE2; --ink-soft:#B8AB9B;
+  --moss-light:#25352E; --amber-light:#3A2D1F; --sky-light:#22333B; --danger-light:#3A2420;
+  --line:#463B30;
+}
+*{box-sizing:border-box;}
+html{scroll-padding-top:env(safe-area-inset-top,0px);}
+html,body{height:100%;}
+body{
+  margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);
+  -webkit-font-smoothing:antialiased;line-height:1.55;
+}
+h1,h2,h3,h4{font-family:var(--font-head);font-weight:600;margin:0 0 .4em;color:var(--ink);}
+p{margin:0 0 1em;}
+button{font-family:inherit;cursor:pointer;}
+.hidden{display:none !important;}
+.screen{display:none;min-height:100%;padding:24px 16px 60px;max-width:920px;margin:0 auto;}
+.screen.active{display:block;animation:fadein .35s ease;}
+@keyframes fadein{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  border:none;border-radius:14px;padding:14px 24px;font-size:1rem;font-weight:700;
+  min-height:48px;transition:transform .15s ease, box-shadow .15s ease;
+}
+.btn:active{transform:scale(.97);}
+.btn-primary{background:var(--moss);color:#fff;box-shadow:0 4px 0 var(--moss-dark);}
+.btn-primary:hover{filter:brightness(1.05);}
+.btn-amber{background:var(--amber);color:#fff;box-shadow:0 4px 0 var(--amber-dark);}
+.btn-outline{background:transparent;color:var(--ink);border:2px solid var(--line);}
+.btn-ghost{background:var(--surface-2);color:var(--ink);}
+.btn:disabled{opacity:.45;cursor:not-allowed;box-shadow:none;}
+.btn-lg{padding:18px 34px;font-size:1.15rem;}
+.row{display:flex;gap:12px;flex-wrap:wrap;}
+.row.between{justify-content:space-between;align-items:center;}
+.row.center{justify-content:center;align-items:center;}
+
+/* topbar */
+#topbar{
+  position:sticky;top:0;z-index:40;background:var(--bg);border-bottom:1px solid var(--line);
+  padding:10px 16px calc(10px + env(safe-area-inset-top,0px));
+  padding-top:calc(10px + env(safe-area-inset-top,0px));
+}
+#topbar .in{max-width:920px;margin:0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.brandmini{font-family:var(--font-head);font-weight:600;font-size:1rem;white-space:nowrap;}
+.pbar-wrap{flex:1;min-width:120px;height:12px;background:var(--surface-2);border-radius:20px;overflow:hidden;}
+.pbar-fill{height:100%;background:linear-gradient(90deg,var(--moss),var(--amber));border-radius:20px;transition:width .5s ease;}
+.pct-label{font-size:.85rem;color:var(--ink-soft);white-space:nowrap;}
+.xp-pill{background:var(--amber-light);color:var(--amber-dark);font-weight:700;font-size:.85rem;padding:6px 12px;border-radius:20px;white-space:nowrap;}
+.icon-btn{background:var(--surface-2);border:none;border-radius:10px;width:40px;height:40px;font-size:1.1rem;display:flex;align-items:center;justify-content:center;}
+
+/* landing */
+.hero{text-align:center;padding:40px 0 10px;}
+.hero .badge-eyebrow{display:inline-block;background:var(--moss-light);color:var(--moss-dark);padding:6px 14px;border-radius:20px;font-weight:600;font-size:.85rem;margin-bottom:18px;}
+.hero h1{font-size:clamp(1.8rem,5vw,2.8rem);line-height:1.15;margin-bottom:14px;}
+.hero .lede{color:var(--ink-soft);font-size:1.08rem;max-width:520px;margin:0 auto 26px;}
+.hero-icon{font-size:4rem;margin-bottom:6px;animation:float 3.2s ease-in-out infinite;}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+.stat-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:26px 0;}
+.stat-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 20px;min-width:120px;text-align:center;}
+.stat-card b{display:block;font-size:1.3rem;font-family:var(--font-head);}
+.stat-card span{font-size:.8rem;color:var(--ink-soft);}
+
+/* map */
+.map-track{position:relative;padding:20px 0;}
+.misi-node{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:18px 20px;margin-bottom:14px;display:flex;align-items:center;gap:16px;
+  box-shadow:0 2px 8px rgba(0,0,0,.04);transition:transform .15s ease;
+}
+.misi-node.unlocked{cursor:pointer;}
+.misi-node.unlocked:hover{transform:translateX(4px);}
+.misi-node.locked{opacity:.55;}
+.misi-node.done{border-color:var(--moss);background:var(--moss-light);}
+.misi-icon{font-size:1.8rem;width:52px;height:52px;border-radius:50%;background:var(--surface-2);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.misi-node.done .misi-icon{background:var(--moss);color:#fff;}
+.misi-title{font-weight:700;font-size:1.05rem;}
+.misi-sub{color:var(--ink-soft);font-size:.88rem;}
+.chev{margin-left:auto;font-size:1.3rem;color:var(--ink-soft);}
+
+/* cards / content */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;margin-bottom:16px;}
+.section-label{font-weight:700;color:var(--moss-dark);text-transform:none;letter-spacing:0;font-size:.95rem;margin-bottom:2px;}
+.step-indicator{font-size:.85rem;color:var(--ink-soft);margin-bottom:14px;}
+
+/* accordion */
+.acc-item{border:1px solid var(--line);border-radius:14px;margin-bottom:10px;overflow:hidden;}
+.acc-head{width:100%;text-align:left;background:var(--surface-2);border:none;padding:14px 16px;font-weight:700;display:flex;justify-content:space-between;align-items:center;font-size:1rem;}
+.acc-body{padding:16px;display:none;background:var(--surface);}
+.acc-item.open .acc-body{display:block;}
+.acc-item.open .acc-head{background:var(--moss-light);}
+
+table.mat-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.92rem;}
+table.mat-table th,table.mat-table td{border:1px solid var(--line);padding:9px 10px;text-align:left;}
+table.mat-table th{background:var(--surface-2);}
+.contoh-box{background:var(--sky-light);border-left:4px solid var(--sky);border-radius:8px;padding:12px 14px;margin:10px 0;font-size:.95rem;}
+.contoh-box b{color:var(--sky);}
+.tambahan-box{background:var(--amber-light);border-left:4px solid var(--amber);border-radius:8px;padding:12px 14px;margin:14px 0;font-size:.93rem;}
+.tambahan-label{font-weight:700;color:var(--amber-dark);font-size:.8rem;letter-spacing:.03em;margin-bottom:4px;}
+
+/* cek pemahaman */
+.q-opt{display:block;width:100%;text-align:left;background:var(--surface-2);border:2px solid transparent;border-radius:12px;padding:12px 14px;margin-bottom:8px;font-size:.98rem;}
+.q-opt.correct{background:var(--moss-light);border-color:var(--moss);}
+.q-opt.wrong{background:var(--danger-light);border-color:var(--danger);animation:shake .4s;}
+@keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-6px);}75%{transform:translateX(6px);}}
+.feedback{margin-top:10px;padding:12px 14px;border-radius:10px;font-weight:600;}
+.feedback.ok{background:var(--moss-light);color:var(--moss-dark);}
+.feedback.no{background:var(--danger-light);color:var(--danger);}
+
+/* memory game */
+.mem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;}
+.mem-card{aspect-ratio:3/2;background:var(--moss);color:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;text-align:center;padding:8px;font-weight:600;font-size:.85rem;cursor:pointer;user-select:none;}
+.mem-card.flipped{background:var(--surface);color:var(--ink);border:2px solid var(--amber);}
+.mem-card.matched{background:var(--moss-light);color:var(--moss-dark);border:2px solid var(--moss);cursor:default;}
+
+/* sorting */
+.sort-pool{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;}
+.sort-item{background:var(--amber-light);color:var(--amber-dark);border:2px solid var(--amber);border-radius:10px;padding:10px 14px;font-weight:600;font-size:.9rem;}
+.sort-item.selected{background:var(--amber);color:#fff;}
+.sort-item.placed{opacity:.3;pointer-events:none;}
+.sort-cats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;}
+.sort-cat{background:var(--surface-2);border:2px dashed var(--line);border-radius:12px;padding:12px;min-height:80px;}
+.sort-cat h4{margin-bottom:6px;font-size:.92rem;}
+.sort-cat .placed-list{display:flex;flex-wrap:wrap;gap:6px;font-size:.85rem;}
+.sort-cat .placed-list span{background:var(--moss-light);color:var(--moss-dark);padding:4px 8px;border-radius:8px;}
+
+/* boss / sequence game */
+.seq-pool{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;}
+.seq-slots{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px;}
+.seq-slot{min-width:120px;min-height:52px;border:2px dashed var(--line);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;background:var(--surface-2);padding:6px;}
+.seq-slot.filled{border-style:solid;border-color:var(--moss);background:var(--moss-light);color:var(--moss-dark);}
+.hud{display:flex;gap:16px;margin-bottom:14px;font-weight:700;flex-wrap:wrap;}
+.hud span{background:var(--surface-2);padding:6px 12px;border-radius:10px;font-size:.9rem;}
+
+/* praktik */
+.prak-block{margin-bottom:14px;}
+.prak-block h4{margin-bottom:6px;color:var(--wood-dark);}
+.prak-block ol{margin:0;padding-left:20px;}
+
+/* refleksi */
+textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px;font-family:inherit;font-size:.95rem;resize:vertical;min-height:70px;background:var(--surface);color:var(--ink);}
+.emoji-row{display:flex;gap:10px;margin:8px 0 4px;}
+.emoji-row button{font-size:1.6rem;background:var(--surface-2);border:2px solid transparent;border-radius:12px;width:52px;height:52px;}
+.emoji-row button.sel{border-color:var(--amber);background:var(--amber-light);}
+.rating-row{display:flex;gap:8px;margin:8px 0 4px;}
+.rating-row button{width:42px;height:42px;border-radius:10px;background:var(--surface-2);border:2px solid transparent;font-weight:700;}
+.rating-row button.sel{background:var(--moss);color:#fff;border-color:var(--moss-dark);}
+
+/* badges */
+.badge-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;}
+.badge-item{text-align:center;background:var(--surface-2);border-radius:14px;padding:14px 8px;opacity:.35;}
+.badge-item.unlocked{opacity:1;background:var(--amber-light);}
+.badge-item .bi{font-size:1.8rem;}
+.badge-item .bn{font-weight:700;font-size:.82rem;margin-top:4px;}
+.badge-item .bd{font-size:.72rem;color:var(--ink-soft);}
+
+/* toast */
+#toast{position:fixed;bottom:calc(18px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--bg);padding:12px 20px;border-radius:12px;font-weight:600;font-size:.92rem;opacity:0;pointer-events:none;transition:all .3s ease;z-index:100;max-width:90vw;text-align:center;}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* modal */
+#modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:200;padding:20px;}
+#modal-overlay.show{display:flex;}
+#modal-box{background:var(--surface);border-radius:18px;padding:24px;max-width:420px;width:100%;text-align:center;}
+
+.confetti{position:fixed;top:-10px;width:8px;height:14px;z-index:300;border-radius:2px;}
+
+.guru-panel{background:var(--sky-light);border:1px solid var(--sky);border-radius:14px;padding:16px;margin-bottom:16px;font-size:.92rem;}
+.guru-panel h4{color:var(--sky);margin-bottom:6px;}
+
+.cert{background:var(--surface);border:3px double var(--amber);border-radius:20px;padding:36px 24px;text-align:center;}
+.cert .cert-name{font-family:var(--font-head);font-size:1.8rem;border-bottom:2px solid var(--line);display:inline-block;padding:4px 20px;margin:10px 0;}
+
+@media print{
+  #topbar,.no-print{display:none !important;}
+  .screen{display:block !important;max-width:100%;}
+  #screen-result{display:block !important;}
+  body{background:#fff;}
+}
+@media (max-width:520px){
+  .btn-lg{width:100%;}
+  .hero-icon{font-size:3rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     PANEL GURU: ubah judul, deskripsi, dan XP di objek CONFIG di bawah (dalam <script>)
+     ============================================================ -->
+
+<div id="topbar" class="hidden">
+  <div class="in">
+    <span class="brandmini">🧵 Misi Kerajinan</span>
+    <div class="pbar-wrap"><div class="pbar-fill" id="pbarFill" style="width:0%"></div></div>
+    <span class="pct-label" id="pctLabel">0%</span>
+    <span class="xp-pill" id="xpPill">⭐ 0 XP</span>
+    <button class="icon-btn" id="btnGuru" title="Mode Guru">🎓</button>
+    <button class="icon-btn" id="btnFullscreen" title="Layar Penuh">⛶</button>
+    <button class="icon-btn" id="btnReset" title="Reset Progress">🔄</button>
+  </div>
+</div>
+
+<!-- LANDING -->
+<section class="screen active" id="screen-landing">
+  <div class="hero">
+    <div class="hero-icon">🪵🧺</div>
+    <span class="badge-eyebrow">Mata Pelajaran Prakarya / Koding &amp; AI</span>
+    <h1>Dari Bahan Jadi Karya:<br>Misi Tahapan Produksi Kerajinan</h1>
+    <p class="lede">Ikuti perjalanan misi belajar tentang Pembahanan, Pembentukan, Perakitan, Finishing, K3, hingga Evaluasi produk kerajinan — lengkap dengan tantangan, game, dan praktik.</p>
+    <div class="stat-row">
+      <div class="stat-card"><b>6</b><span>Misi Belajar</span></div>
+      <div class="stat-card"><b>2+</b><span>Game Interaktif</span></div>
+      <div class="stat-card"><b id="landingXp">0</b><span>XP Kamu</span></div>
+    </div>
+    <button class="btn btn-primary btn-lg" id="btnMulai">🚀 Mulai Belajar</button>
+    <div id="welcomeBack" class="hidden" style="margin-top:22px;">
+      <div class="card" style="max-width:420px;margin:0 auto;">
+        <p><b>Selamat datang kembali! 👋</b></p>
+        <p style="color:var(--ink-soft);font-size:.92rem;">Kamu terakhir berhenti di: <b id="lastMisiLabel">-</b></p>
+        <div class="row center">
+          <button class="btn btn-amber" id="btnLanjutkan">▶ Lanjutkan Belajar</button>
+          <button class="btn btn-outline" id="btnMulaiAwal">↩ Mulai dari Awal</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEARNING MAP -->
+<section class="screen" id="screen-map">
+  <h2>🗺️ Peta Perjalanan Belajar</h2>
+  <p style="color:var(--ink-soft);margin-bottom:18px;">Selesaikan setiap misi untuk membuka misi berikutnya.</p>
+  <div class="map-track" id="mapTrack"></div>
+  <div class="card hidden" id="finalCard">
+    <h3>🏆 Final Mission</h3>
+    <p>Gabungkan semua kemampuanmu dalam satu tantangan akhir.</p>
+    <button class="btn btn-amber" id="btnGotoFinal">Mulai Final Mission →</button>
+  </div>
+</section>
+
+<!-- MISI 1: KENALI MATERINYA -->
+<section class="screen" id="screen-misi1">
+  <div class="step-indicator">Misi 1 dari 6 — Kenali Materinya</div>
+  <div class="card">
+    <div class="guru-panel no-print" id="guruPanel1" style="display:none;">
+      <h4>🎓 Catatan untuk Guru</h4>
+      <p>Tujuan pembelajaran: siswa memahami tahapan produksi kerajinan (pembahanan, pembentukan, perakitan, finishing), pentingnya K3, dan cara mengevaluasi produk. Ajak siswa membaca tujuan bersama sebelum masuk ke materi.</p>
+    </div>
+    <h2>🔓 Selamat Datang di Misi Pembelajaran!</h2>
+    <p>Pada misi ini kamu akan mempelajari <b>empat tahapan utama produksi kerajinan</b> (Pembahanan, Pembentukan, Perakitan, Finishing), pentingnya melakukan setiap tahap dengan baik, <b>K3 (Kesehatan dan Keselamatan Kerja)</b>, cara <b>mengevaluasi produk</b>, hingga contoh alur pembuatan produk nyata.</p>
+    <div class="tambahan-box">
+      <div class="tambahan-label">🎯 TUJUAN PEMBELAJARAN</div>
+      <ul style="margin:0;padding-left:18px;">
+        <li>Siswa mampu menjelaskan empat tahapan utama produksi kerajinan.</li>
+        <li>Siswa mampu menerapkan prinsip K3 saat membuat kerajinan.</li>
+        <li>Siswa mampu mengevaluasi hasil produk kerajinan yang dibuat.</li>
+      </ul>
+    </div>
+    <p style="color:var(--ink-soft);font-size:.9rem;">Total ada <b>6 Misi</b> yang harus kamu selesaikan sebelum sampai ke Final Mission. Selamat berpetualang! 💪</p>
+    <button class="btn btn-primary btn-lg" onclick="completeMisi(1)">Lanjut ke Eksplorasi →</button>
+  </div>
+</section>
+
+<!-- MISI 2: EKSPLORASI MATERI -->
+<section class="screen" id="screen-misi2">
+  <div class="step-indicator">Misi 2 dari 6 — Eksplorasi | <span id="bagianIndicator">Bagian 1 dari 6</span></div>
+  <div class="card" id="materiWrap"></div>
+  <div class="row between">
+    <button class="btn btn-outline" id="btnMateriPrev">← Sebelumnya</button>
+    <button class="btn btn-primary" id="btnMateriNext">Lanjut →</button>
+  </div>
+</section>
+
+<!-- MISI 3: TANTANGAN -->
+<section class="screen" id="screen-misi3">
+  <div class="step-indicator">Misi 3 dari 6 — Tantangan</div>
+
+  <div class="card">
+    <h3>🎮 Game 1 — Memory Challenge</h3>
+    <p style="color:var(--ink-soft);font-size:.92rem;">Cocokkan istilah tahapan produksi dengan pengertiannya.</p>
+    <div class="hud"><span id="memScore">⭐ Skor: 0</span><span id="memTries">🔁 Percobaan: 0</span></div>
+    <div class="mem-grid" id="memGrid"></div>
+    <div class="feedback ok hidden" id="memDone">🎉 Kerja bagus! Semua pasangan ditemukan.</div>
+  </div>
+
+  <div class="card">
+    <h3>🎮 Game 2 — Sorting Challenge</h3>
+    <p style="color:var(--ink-soft);font-size:.92rem;">Masukkan setiap bahan ke kategori teknik pembentukan yang sesuai. Ketuk bahan, lalu ketuk kategori tujuannya.</p>
+    <div class="sort-pool" id="sortPool"></div>
+    <div class="sort-cats" id="sortCats"></div>
+    <div class="feedback ok hidden" id="sortDone">🎉 Semua bahan berhasil dikelompokkan dengan benar!</div>
+  </div>
+
+  <div class="card">
+    <h3>💬 Diskusi</h3>
+    <p><b>1.</b> Bayangkan kamu membuat keranjang dari rotan tetapi lupa memeriksa kondisi rotan pada tahap pembahanan. Apa yang mungkin terjadi pada tahap selanjutnya? Jelaskan alasanmu.</p>
+    <textarea id="diskusi1" placeholder="Tulis pendapatmu di sini..."></textarea>
+    <p style="margin-top:14px;"><b>2.</b> Saat mengerjakan finishing kerajinan kayu, temanmu terburu-buru dan tidak memakai masker maupun kacamata pelindung. Apa risikonya, dan apa yang akan kamu sarankan?</p>
+    <textarea id="diskusi2" placeholder="Tulis pendapatmu di sini..."></textarea>
+    <button class="btn btn-ghost" style="margin-top:10px;" onclick="saveDiskusi()">Simpan Jawaban Diskusi</button>
+  </div>
+
+  <button class="btn btn-primary btn-lg" id="btnMisi3Lanjut" disabled onclick="completeMisi(3)">Selesaikan Misi 3 →</button>
+</section>
+
+<!-- MISI 4: PRAKTIK -->
+<section class="screen" id="screen-misi4">
+  <div class="step-indicator">Misi 4 dari 6 — Praktik</div>
+  <div class="card">
+    <h2>🎯 MINI PRAKTIK</h2>
+    <h3>Membuat Tempat Pensil Sederhana dari Kayu</h3>
+    <div class="prak-block"><h4>🎯 Tujuan</h4><p>Menerapkan tahapan pembahanan, pembentukan, perakitan, dan finishing untuk menghasilkan tempat pensil sederhana yang rapi dan aman digunakan.</p></div>
+    <div class="prak-block"><h4>🧰 Alat/Bahan</h4><p>Potongan kayu ringan/limbah kayu, lem kayu atau paku kecil, amplas, cat/pelapis kayu (opsional), penggaris, alat pemotong yang aman digunakan siswa (dengan pengawasan guru).</p></div>
+    <div class="prak-block"><h4>📋 Langkah</h4>
+      <ol>
+        <li>Pembahanan — pilih, ukur, dan potong kayu sesuai ukuran yang dibutuhkan.</li>
+        <li>Pembentukan — buat potongan kayu sesuai bentuk yang direncanakan.</li>
+        <li>Perakitan — satukan bagian-bagian kayu menggunakan lem, paku, atau sambungan yang sesuai.</li>
+        <li>Finishing — amplas permukaan, bersihkan sisa lem, lalu beri cat/lapisan pelindung.</li>
+      </ol>
+    </div>
+    <div class="prak-block"><h4>⏱️ Waktu</h4><p>10–20 menit</p></div>
+    <div class="prak-block"><h4>🏆 Tantangan</h4><p>Pastikan seluruh sudut aman (tidak tajam) dan seluruh permukaan halus saat disentuh.</p></div>
+    <div id="praktikStart">
+      <button class="btn btn-amber btn-lg" onclick="startPraktik()">✅ Aku Siap Praktik</button>
+    </div>
+    <div id="praktikFinish" class="hidden">
+      <button class="btn btn-primary btn-lg" onclick="finishPraktik()">🏁 Selesai Praktik</button>
+    </div>
+  </div>
+</section>
+
+<!-- MISI 5: CHALLENGE BOSS -->
+<section class="screen" id="screen-misi5">
+  <div class="step-indicator">Misi 5 dari 6 — 🔥 Challenge BOS 🔥</div>
+  <div class="card">
+    <h2>Susun Tahapan Produksi!</h2>
+    <p style="color:var(--ink-soft);font-size:.92rem;">Ketuk kartu tahapan sesuai urutan produksi yang benar, dari awal hingga akhir.</p>
+    <div class="hud">
+      <span id="bossLives">❤️ Nyawa: 3</span>
+      <span id="bossScore">⭐ Skor: 0</span>
+      <span id="bossTime">⏱️ Waktu: 0 dtk</span>
+    </div>
+    <div class="seq-slots" id="bossSlots"></div>
+    <div class="seq-pool" id="bossPool"></div>
+    <div class="feedback no hidden" id="bossHint"></div>
+    <div class="feedback ok hidden" id="bossWin">🎉 CHALLENGE BOS BERHASIL!</div>
+  </div>
+</section>
+
+<!-- MISI 6: REFLEKSI -->
+<section class="screen" id="screen-misi6">
+  <div class="step-indicator">Misi 6 dari 6 — 💭 Refleksi Diri</div>
+  <div class="card">
+    <p><b>1.</b> Apa hal baru yang kamu pelajari hari ini?</p>
+    <textarea id="ref1"></textarea>
+    <p style="margin-top:14px;"><b>2.</b> Bagian mana yang paling mudah kamu pahami?</p>
+    <textarea id="ref2"></textarea>
+    <p style="margin-top:14px;"><b>3.</b> Bagian mana yang masih membingungkan?</p>
+    <textarea id="ref3"></textarea>
+    <p style="margin-top:14px;"><b>4.</b> Bagaimana materi ini dapat digunakan dalam kehidupan sehari-hari?</p>
+    <textarea id="ref4"></textarea>
+    <p style="margin-top:14px;"><b>5.</b> Apa yang akan kamu lakukan setelah mempelajari materi ini?</p>
+    <textarea id="ref5"></textarea>
+
+    <p style="margin-top:18px;"><b>Seberapa paham kamu dengan materi ini?</b></p>
+    <div class="rating-row" id="ratingRow">
+      <button data-v="1">1</button><button data-v="2">2</button><button data-v="3">3</button><button data-v="4">4</button><button data-v="5">5</button>
+    </div>
+    <p style="margin-top:10px;"><b>Bagaimana perasaanmu?</b></p>
+    <div class="emoji-row" id="emojiRow">
+      <button data-v="😀">😀</button><button data-v="🙂">🙂</button><button data-v="😐">😐</button><button data-v="😕">😕</button>
+    </div>
+    <button class="btn btn-primary btn-lg" style="margin-top:16px;" onclick="saveRefleksi()">Simpan Refleksi</button>
+  </div>
+</section>
+
+<!-- FINAL MISSION -->
+<section class="screen" id="screen-final">
+  <div class="step-indicator">🏆 Final Mission</div>
+  <div class="card">
+    <h2>Studi Kasus: Membuat Tempat Pensil untuk Teman</h2>
+    <p>Kamu diminta membuat tempat pensil sederhana dari kayu untuk temanmu. Susun kembali alur pembuatannya sesuai urutan yang benar (5 langkah), lalu jawab pertanyaan analisis di bawah.</p>
+    <div class="seq-slots" id="finalSlots"></div>
+    <div class="seq-pool" id="finalPool"></div>
+    <div class="feedback no hidden" id="finalHint"></div>
+    <div id="finalQ" class="hidden" style="margin-top:16px;">
+      <p><b>Pertanyaan analisis:</b> Jika kamu lupa mengukur kayu dengan benar pada tahap pembahanan, tahap mana yang paling terdampak, dan mengapa?</p>
+      <textarea id="finalAnswer"></textarea>
+      <button class="btn btn-amber btn-lg" style="margin-top:12px;" onclick="finishFinal()">🎉 Selesaikan Final Mission</button>
+    </div>
+  </div>
+</section>
+
+<!-- RESULT / SERTIFIKAT -->
+<section class="screen" id="screen-result">
+  <div class="card no-print">
+    <h2>🎉 SELAMAT!</h2>
+    <p>Kamu telah menyelesaikan seluruh misi pembelajaran.</p>
+    <div class="stat-row">
+      <div class="stat-card"><b id="resXp">0</b><span>⭐ Total XP</span></div>
+      <div class="stat-card"><b id="resLevel">1</b><span>🏅 Level</span></div>
+      <div class="stat-card"><b id="resBadges">0</b><span>🎯 Badge</span></div>
+    </div>
+    <h3 style="margin-top:22px;">Badge / Pencapaian</h3>
+    <div class="badge-grid" id="badgeGrid"></div>
+  </div>
+
+  <div class="card">
+    <h3 class="no-print">📄 Sertifikat Penyelesaian</h3>
+    <div class="cert">
+      <p style="letter-spacing:.05em;color:var(--amber-dark);font-weight:700;">🏆 SERTIFIKAT PENYELESAIAN</p>
+      <p style="margin-top:14px;color:var(--ink-soft);">Diberikan kepada</p>
+      <div class="cert-name" id="certName">___________________</div>
+      <p style="margin-top:10px;color:var(--ink-soft);">atas keberhasilan menyelesaikan misi pembelajaran</p>
+      <p style="font-weight:700;">Tahapan Produksi Kerajinan &amp; K3</p>
+      <p style="margin-top:10px;">Status: <b>TELAH MENYELESAIKAN SELURUH MISI</b></p>
+    </div>
+    <div class="row center no-print" style="margin-top:16px;">
+      <input type="text" id="siswaNama" placeholder="Tulis nama lengkapmu" style="padding:12px;border-radius:10px;border:1px solid var(--line);flex:1;min-width:200px;background:var(--surface);color:var(--ink);">
+      <button class="btn btn-ghost" onclick="setCertName()">Simpan Nama</button>
+    </div>
+    <div class="row center no-print" style="margin-top:14px;">
+      <button class="btn btn-amber" onclick="window.print()">📄 Cetak Hasil</button>
+      <button class="btn btn-outline" id="btnResetFinal">🔄 Reset Progress</button>
+    </div>
+  </div>
+</section>
+
+<div id="toast"></div>
+<div id="modal-overlay"><div id="modal-box">
+  <h3>Apakah kamu yakin ingin menghapus seluruh progress?</h3>
+  <div class="row center" style="margin-top:14px;">
+    <button class="btn btn-outline" id="modalCancel">Batal</button>
+    <button class="btn btn-amber" id="modalConfirm">Hapus Progress</button>
+  </div>
+</div></div>
+
+<script>
+/* ============================================================
+   KONFIGURASI GURU — ubah judul & XP di sini bila perlu
+   ============================================================ */
+const CONFIG = {
+  xp: { baca:10, cek:20, game:30, boss:50, praktik:40, refleksi:20, final:60 },
+  levels: [ {min:0,name:"Penjelajah Materi"}, {min:50,name:"Pemburu Pengetahuan"}, {min:150,name:"Master Pembelajaran"} ]
+};
+
+/* ===== TEMPEL MATERI DI SINI =====
+   Ganti / tambah isi array MATERI untuk mengubah konten Misi 2.
+   Setiap elemen = satu "Bagian" (subbab) yang tampil bertahap. */
+const MATERI = [
+{title:"C. Empat Tahapan Utama Produksi — 1. Pembahanan", html:`
+  <h3>1. Pembahanan</h3>
+  <p>Pembahanan adalah tahap mempersiapkan bahan atau material agar siap digunakan dan siap dibentuk. Pada tahap ini, bahan biasanya diperiksa, dibersihkan, diukur, kemudian dipotong atau dipersiapkan sesuai kebutuhan.</p>
+  <div class="contoh-box"><b>Contoh:</b>
+    <ul style="margin:6px 0 0;padding-left:18px;">
+      <li>Bambu dibersihkan dan dipotong sesuai ukuran yang dibutuhkan.</li>
+      <li>Kayu diukur dan dipotong menjadi beberapa bagian.</li>
+      <li>Kertas disiapkan dengan ukuran tertentu.</li>
+      <li>Rotan dipilih dan dipersiapkan agar mudah dibentuk.</li>
+    </ul>
+  </div>
+  <p>Sederhananya, pembahanan dapat dianggap sebagai tahap "menyiapkan bahan sebelum bekerja". Jika bahan tidak disiapkan dengan baik, tahap berikutnya dapat menjadi lebih sulit.</p>`},
+
+{title:"C. Empat Tahapan Utama Produksi — 2. Pembentukan", html:`
+  <h3>2. Pembentukan</h3>
+  <p>Setelah bahan siap, bahan kemudian dibentuk menjadi bagian-bagian sesuai rancangan produk. Teknik pembentukan tidak selalu sama karena bergantung pada jenis bahan, bentuk awal bahan, dan bentuk produk yang ingin dibuat.</p>
+  <p><b>Contoh teknik pembentukan berdasarkan bahan:</b></p>
+  <table class="mat-table">
+    <tr><th>Bahan</th><th>Teknik</th><th>Contoh</th></tr>
+    <tr><td>Kertas</td><td>Melipat</td><td>Kotak atau hiasan kertas</td></tr>
+    <tr><td>Kayu</td><td>Memotong / memahat</td><td>Hiasan atau tempat pensil</td></tr>
+    <tr><td>Bambu</td><td>Memotong / membengkokkan</td><td>Keranjang atau hiasan</td></tr>
+    <tr><td>Rotan</td><td>Memotong / membengkokkan</td><td>Keranjang</td></tr>
+    <tr><td>Besi</td><td>Memotong / membengkokkan / mengelas</td><td>Rangka atau dekorasi</td></tr>
+    <tr><td>Logam lempengan</td><td>Mengetok</td><td>Hiasan atau bentuk dekoratif</td></tr>
+  </table>
+  <p>Pemotongan dan pemahatan juga dapat digunakan untuk membuat sambungan. Misalnya, bagian kayu dipotong atau dibuat lubang tertentu agar dapat disambungkan dengan bagian kayu lainnya. Pada bambu, teknik serupa dapat digunakan untuk menyambungkan dua batang bambu.</p>`},
+
+{title:"C. Empat Tahapan Utama Produksi — 3. Perakitan", html:`
+  <h3>3. Perakitan</h3>
+  <p>Perakitan adalah proses menggabungkan bagian-bagian yang sudah dibuat menjadi satu produk yang utuh. Perakitan dapat menggunakan lem, paku, tali, sekrup, sambungan kayu, atau teknik lainnya sesuai bahan dan desain.</p>
+  <div class="contoh-box"><b>Contoh:</b> ketika membuat tempat pensil dari beberapa potongan kayu, potongan-potongan tersebut harus disatukan sehingga membentuk dinding dan dasar tempat pensil.</div>`},
+
+{title:"C. Empat Tahapan Utama Produksi — 4. Finishing", html:`
+  <h3>4. Finishing</h3>
+  <p>Finishing adalah tahap penyelesaian sebelum produk dikemas atau digunakan. Tujuannya bukan hanya membuat produk terlihat lebih menarik, tetapi juga dapat membuat permukaan lebih halus, bersih, dan lebih awet.</p>
+  <ul>
+    <li>Mengamplas permukaan kayu agar tidak kasar.</li>
+    <li>Membersihkan sisa lem yang menempel.</li>
+    <li>Memberikan cat atau warna.</li>
+    <li>Memberikan lapisan pelindung agar produk lebih tahan lama.</li>
+    <li>Memastikan tidak ada bagian tajam atau berbahaya.</li>
+  </ul>
+  <p>Jadi, finishing bukan sekadar "mempercantik". Finishing juga berhubungan dengan kenyamanan, keamanan, dan ketahanan produk.</p>
+  <h3 style="margin-top:20px;">D. Mengapa Setiap Tahap Harus Dilakukan dengan Baik?</h3>
+  <p>Bayangkan kita membuat tempat pensil dari kayu. Jika kayu tidak diukur dengan benar pada tahap pembahanan, maka potongannya bisa tidak sama. Jika pembentukan tidak tepat, bagian-bagiannya sulit dirakit. Jika perakitan kurang kuat, produk mudah lepas. Jika finishing tidak dilakukan, permukaan bisa kasar dan produk terlihat kurang rapi. Artinya, kesalahan pada satu tahap dapat memengaruhi tahap berikutnya.</p>`},
+
+{title:"E. K3 (Kesehatan dan Keselamatan Kerja)", html:`
+  <h3>E. K3 (Kesehatan dan Keselamatan Kerja)</h3>
+  <p>K3 adalah upaya menjaga kesehatan dan keselamatan selama bekerja. Dalam pembuatan kerajinan, K3 sangat penting karena setiap bahan, alat, dan proses dapat memiliki risiko yang berbeda.</p>
+  <h4>1. Bahaya dari Debu dan Sisa Potongan</h4>
+  <p>Pemotongan, pemahatan, dan penghalusan bahan seperti kayu atau bambu dapat menghasilkan serpihan dan debu. Debu dapat mengganggu pernapasan, sedangkan serpihan dapat mengenai mata atau kulit.</p>
+  <p><b>Alat pelindung yang dapat digunakan:</b></p>
+  <ul><li>Kacamata pelindung untuk melindungi mata.</li><li>Masker antidebu untuk mengurangi masuknya debu ke saluran pernapasan.</li></ul>
+  <h4>2. Bahaya dari Bahan Kimia</h4>
+  <p>Beberapa bahan finishing atau bahan produksi mengandung zat kimia yang dapat mengiritasi kulit atau mengganggu pernapasan. Karena itu, penggunaan sarung tangan dan masker yang sesuai dengan bahan yang digunakan sangat penting.</p>
+  <p>Selain alat pelindung, tempat kerja harus memiliki ventilasi yang baik dan bahan kimia harus digunakan sesuai petunjuk.</p>
+  <h4>3. Sikap Kerja yang Aman</h4>
+  <ul>
+    <li><b>Rapi:</b> alat dan bahan diletakkan pada tempatnya.</li>
+    <li><b>Hati-hati:</b> tidak menggunakan alat secara sembarangan.</li>
+    <li><b>Teliti:</b> mengukur dan memeriksa hasil kerja sebelum melanjutkan.</li>
+    <li><b>Konsentrasi:</b> tidak bercanda ketika menggunakan alat.</li>
+    <li><b>Bertanggung jawab:</b> membersihkan tempat kerja setelah selesai.</li>
+  </ul>`},
+
+{title:"F–G. Evaluasi Produk &amp; Contoh Alur Pembuatan", html:`
+  <h3>F. Evaluasi Produk Kerajinan</h3>
+  <p>Setelah produk selesai dibuat, pekerjaan belum benar-benar selesai. Kita perlu melakukan evaluasi. Evaluasi berarti memeriksa dan menilai apakah produk sudah sesuai dengan rencana dan dapat digunakan dengan baik.</p>
+  <p><b>Pertanyaan yang dapat digunakan saat evaluasi:</b></p>
+  <ol>
+    <li>Apakah produk dapat berfungsi sesuai tujuan?</li>
+    <li>Apakah bentuknya sudah sesuai dengan rancangan?</li>
+    <li>Apakah ukuran dan bagian-bagiannya sudah tepat?</li>
+    <li>Apakah produk kuat dan aman digunakan?</li>
+    <li>Apakah permukaannya sudah rapi dan halus?</li>
+    <li>Apakah warna atau finishing sudah sesuai?</li>
+    <li>Apakah ada bagian yang perlu diperbaiki?</li>
+    <li>Apa yang akan saya ubah jika membuat produk ini lagi?</li>
+  </ol>
+  <h3 style="margin-top:20px;">G. Contoh Alur Pembuatan Produk</h3>
+  <p><b>Contoh: Membuat Tempat Pensil Sederhana dari Kayu</b></p>
+  <div class="contoh-box">
+    Pembahanan → memilih kayu, membersihkan, mengukur, dan memotong bahan.<br>
+    Pembentukan → membuat potongan kayu sesuai bentuk yang direncanakan.<br>
+    Perakitan → menyatukan bagian-bagian kayu menggunakan lem, paku, atau sambungan yang sesuai.<br>
+    Finishing → mengamplas, membersihkan sisa lem, kemudian mengecat atau memberi lapisan pelindung.<br>
+    Evaluasi → memeriksa apakah tempat pensil kuat, rapi, aman, dan dapat digunakan.
+  </div>
+  <div class="tambahan-box">
+    <div class="tambahan-label">PENJELASAN TAMBAHAN</div>
+    Kelima tahap ini (Pembahanan, Pembentukan, Perakitan, Finishing, Evaluasi) akan kamu gunakan lagi saat Praktik dan Final Mission — jadi ingat baik-baik urutannya!
+  </div>`}
+];
+
+const CEK = [
+ {type:"bs", q:"Pembahanan adalah tahap menyiapkan bahan sebelum bekerja.", ans:true, exp:"Benar, pembahanan memang tahap menyiapkan bahan sebelum dibentuk."},
+ {type:"choice", q:"Teknik apa yang digunakan untuk membentuk bahan bambu?", opts:["Melipat","Memotong/membengkokkan","Mengetok","Menjahit"], ans:1, exp:"Bambu dibentuk dengan cara dipotong atau dibengkokkan."},
+ {type:"bs", q:"Finishing hanya bertujuan membuat produk terlihat lebih menarik, tidak berkaitan dengan keamanan.", ans:false, exp:"Salah. Finishing juga berkaitan dengan kenyamanan, keamanan, dan ketahanan produk."},
+ {type:"isian", q:"K3 adalah singkatan dari Kesehatan dan ____ Kerja.", ans:"keselamatan", exp:"K3 = Kesehatan dan Keselamatan Kerja."},
+ {type:"choice", q:"Alat pelindung apa yang digunakan untuk mengurangi debu masuk ke saluran pernapasan?", opts:["Kacamata pelindung","Masker antidebu","Sarung tangan","Sepatu bot"], ans:1, exp:"Masker antidebu digunakan untuk mengurangi debu yang masuk ke saluran pernapasan."}
+];
+
+const MEM_PAIRS = [
+ {a:"Pembahanan", b:"Menyiapkan bahan sebelum dibentuk"},
+ {a:"Pembentukan", b:"Mengubah bahan menjadi bagian sesuai rancangan"},
+ {a:"Perakitan", b:"Menggabungkan bagian menjadi produk utuh"},
+ {a:"Finishing", b:"Tahap penyelesaian: halus, rapi, dan aman"}
+];
+
+const SORT_ITEMS = [
+ {name:"Kertas", cat:"Melipat"},
+ {name:"Kayu", cat:"Memotong/Membentuk"},
+ {name:"Bambu", cat:"Memotong/Membentuk"},
+ {name:"Rotan", cat:"Memotong/Membentuk"},
+ {name:"Logam lempengan", cat:"Mengetok"}
+];
+const SORT_CATS = ["Melipat","Memotong/Membentuk","Mengetok"];
+
+const BOSS_SEQ = ["Pembahanan","Pembentukan","Perakitan","Finishing"];
+const FINAL_SEQ = ["Pembahanan","Pembentukan","Perakitan","Finishing","Evaluasi"];
+
+const BADGES = [
+ {id:"firstStep", icon:"🏅", name:"First Step", desc:"Memulai pembelajaran"},
+ {id:"smartThinker", icon:"🧠", name:"Smart Thinker", desc:"Menyelesaikan cek pemahaman"},
+ {id:"gameMaster", icon:"🎮", name:"Game Master", desc:"Menyelesaikan seluruh game"},
+ {id:"bossSlayer", icon:"🔥", name:"Boss Slayer", desc:"Mengalahkan Challenge BOS"},
+ {id:"doer", icon:"🛠️", name:"Doer", desc:"Menyelesaikan praktik"},
+ {id:"deepThinker", icon:"💭", name:"Deep Thinker", desc:"Menyelesaikan refleksi"},
+ {id:"learningMaster", icon:"🏆", name:"Learning Master", desc:"Menyelesaikan seluruh pembelajaran"}
+];
+
+/* ============================================================
+   STATE & PERSISTENCE
+   ============================================================ */
+const DEFAULT_STATE = {
+  xp:0, misiDone:{1:false,2:false,3:false,4:false,5:false,6:false},
+  finalDone:false, badges:[], name:"", lastScreen:"screen-landing",
+  cekAnswered:{}, memMatched:[], sortPlaced:{}, diskusi:{d1:"",d2:""},
+  refleksi:{r1:"",r2:"",r3:"",r4:"",r5:"",rating:0,emoji:""}
+};
+let state = loadState();
+
+function loadState(){
+  try{
+    const raw = localStorage.getItem('misiKerajinan');
+    if(!raw) return JSON.parse(JSON.stringify(DEFAULT_STATE));
+    return Object.assign(JSON.parse(JSON.stringify(DEFAULT_STATE)), JSON.parse(raw));
+  }catch(e){ return JSON.parse(JSON.stringify(DEFAULT_STATE)); }
+}
+function saveState(){ try{ localStorage.setItem('misiKerajinan', JSON.stringify(state)); }catch(e){} }
+
+function addXP(n){ state.xp += n; saveState(); updateHUD(); toast("⭐ +"+n+" XP!"); }
+function currentLevel(){
+  let lv = CONFIG.levels[0];
+  for(const l of CONFIG.levels){ if(state.xp>=l.min) lv=l; }
+  return lv;
+}
+function unlockBadge(id){
+  if(!state.badges.includes(id)){ state.badges.push(id); saveState(); toast("🏅 Badge baru: "+BADGES.find(b=>b.id===id).name); }
+}
+function misiUnlocked(n){
+  if(n===1) return true;
+  return !!state.misiDone[n-1];
+}
+function totalSteps(){ return 7; } // 6 misi + final
+function doneSteps(){
+  let c=0; for(let i=1;i<=6;i++) if(state.misiDone[i]) c++;
+  if(state.finalDone) c++;
+  return c;
+}
+function updateHUD(){
+  const pct = Math.round((doneSteps()/totalSteps())*100);
+  document.getElementById('pbarFill').style.width = pct+"%";
+  document.getElementById('pctLabel').textContent = pct+"%";
+  document.getElementById('xpPill').textContent = "⭐ "+state.xp+" XP";
+  document.getElementById('landingXp').textContent = state.xp;
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.getElementById('topbar').classList.toggle('hidden', id==='screen-landing');
+  state.lastScreen = id; saveState();
+  window.scrollTo({top:0,behavior:'smooth'});
+  updateHUD();
+  if(id==='screen-map') renderMap();
+}
+
+function completeMisi(n){
+  if(!state.misiDone[n]){
+    state.misiDone[n]=true; saveState();
+    if(n===1) unlockBadge('firstStep');
+    if(n===6) unlockBadge('deepThinker');
+    addXP(CONFIG.xp.baca);
+  }
+  showScreen('screen-map');
+}
+
+/* ============================================================
+   MAP RENDER
+   ============================================================ */
+const MISI_META = [
+ {n:1, icon:"📖", title:"Misi 1 — Kenali Materinya", sub:"Tujuan pembelajaran & pengenalan"},
+ {n:2, icon:"🔍", title:"Misi 2 — Eksplorasi", sub:"Pelajari materi tahap demi tahap"},
+ {n:3, icon:"🎮", title:"Misi 3 — Tantangan", sub:"Game & diskusi"},
+ {n:4, icon:"🛠️", title:"Misi 4 — Praktik", sub:"Mini praktik membuat kerajinan"},
+ {n:5, icon:"🔥", title:"Misi 5 — Challenge BOS", sub:"Susun tahapan produksi"},
+ {n:6, icon:"💭", title:"Misi 6 — Refleksi", sub:"Refleksikan pembelajaranmu"}
+];
+function renderMap(){
+  const track = document.getElementById('mapTrack');
+  track.innerHTML='';
+  MISI_META.forEach(m=>{
+    const unlocked = misiUnlocked(m.n);
+    const done = state.misiDone[m.n];
+    const div = document.createElement('div');
+    div.className = 'misi-node ' + (done?'done':(unlocked?'unlocked':'locked'));
+    div.innerHTML = `<div class="misi-icon">${done?'✅':(unlocked?m.icon:'🔒')}</div>
+      <div><div class="misi-title">${m.title}</div><div class="misi-sub">${m.sub}</div></div>
+      <div class="chev">${unlocked?'›':''}</div>`;
+    if(unlocked) div.onclick=()=>openMisi(m.n);
+    track.appendChild(div);
+  });
+  const allDone = MISI_META.every(m=>state.misiDone[m.n]);
+  document.getElementById('finalCard').classList.toggle('hidden', !allDone || state.finalDone);
+  if(state.finalDone){
+    showScreen.__resultReady = true;
+  }
+}
+function openMisi(n){
+  if(n===2){ materiIndex = getFirstUnfinishedMateriIndex(); renderMateriStep(); }
+  if(n===3){ initGame3(); }
+  if(n===4){ initPraktikUI(); }
+  if(n===5){ initBoss(); }
+  showScreen('screen-misi'+n);
+}
+document.getElementById('btnGotoFinal').onclick=()=>{ initFinal(); showScreen('screen-final'); };
+
+/* ============================================================
+   MISI 2 — MATERI STEPPER
+   ============================================================ */
+let materiIndex = 0;
+function getFirstUnfinishedMateriIndex(){ return 0; }
+function renderMateriStep(){
+  const total = MATERI.length + 1; // + cek pemahaman step
+  document.getElementById('bagianIndicator').textContent = `Bagian ${materiIndex+1} dari ${total}`;
+  const wrap = document.getElementById('materiWrap');
+  if(materiIndex < MATERI.length){
+    wrap.innerHTML = `<div class="section-label">Materi</div>` + MATERI[materiIndex].html;
+  } else {
+    wrap.innerHTML = renderCekHTML();
+    attachCekHandlers();
+  }
+  document.getElementById('btnMateriPrev').disabled = materiIndex===0;
+  document.getElementById('btnMateriNext').textContent = (materiIndex===total-1) ? "Selesaikan Misi 2 →" : "Lanjut →";
+}
+document.getElementById('btnMateriPrev').onclick=()=>{ if(materiIndex>0){materiIndex--; renderMateriStep();} };
+document.getElementById('btnMateriNext').onclick=()=>{
+  const total = MATERI.length + 1;
+  if(materiIndex < MATERI.length){
+    addXP(2); // small XP per bagian read
+    materiIndex++; renderMateriStep();
+  } else {
+    // finishing cek pemahaman step
+    const answeredAll = CEK.every((_,i)=>state.cekAnswered[i]);
+    if(!answeredAll){ toast("Selesaikan semua Cek Pemahaman dulu ya!"); return; }
+    unlockBadge('smartThinker');
+    addXP(CONFIG.xp.cek);
+    completeMisi(2);
+  }
+};
+
+function renderCekHTML(){
+  let html = `<div class="section-label">🎯 Cek Pemahaman</div><p style="color:var(--ink-soft);font-size:.9rem;">Jawab semua pertanyaan berikut sebelum melanjutkan.</p>`;
+  CEK.forEach((q,i)=>{
+    html += `<div class="card" style="margin-top:12px;padding:16px;"><p><b>${i+1}. ${q.q}</b></p><div id="cekArea${i}"></div><div id="cekFeedback${i}"></div></div>`;
+  });
+  return html;
+}
+function attachCekHandlers(){
+  CEK.forEach((q,i)=>{
+    const area = document.getElementById('cekArea'+i);
+    const already = state.cekAnswered[i];
+    if(q.type==='bs'){
+      area.innerHTML = `<div class="row"><button class="q-opt" style="width:auto;flex:1;" data-v="true">Benar</button><button class="q-opt" style="width:auto;flex:1;" data-v="false">Salah</button></div>`;
+      area.querySelectorAll('button').forEach(btn=>{
+        btn.onclick=()=>checkCek(i, btn.dataset.v==='true', q);
+      });
+    } else if(q.type==='choice'){
+      area.innerHTML = q.opts.map((o,oi)=>`<button class="q-opt" data-v="${oi}">${o}</button>`).join('');
+      area.querySelectorAll('button').forEach(btn=>{
+        btn.onclick=()=>checkCek(i, parseInt(btn.dataset.v), q);
+      });
+    } else if(q.type==='isian'){
+      area.innerHTML = `<input type="text" id="isian${i}" placeholder="Ketik jawaban..." style="padding:10px;border-radius:8px;border:1px solid var(--line);width:100%;max-width:280px;background:var(--surface);color:var(--ink);"> <button class="btn btn-ghost" style="margin-top:8px;">Cek Jawaban</button>`;
+      area.querySelector('button').onclick=()=>{
+        const val = document.getElementById('isian'+i).value.trim().toLowerCase();
+        checkCek(i, val, q);
+      };
+    }
+    if(already) markCekDone(i,q,true);
+  });
+}
+function checkCek(i, userAns, q){
+  let correct;
+  if(q.type==='isian') correct = userAns===q.ans.toLowerCase();
+  else correct = userAns===q.ans;
+  const fb = document.getElementById('cekFeedback'+i);
+  if(correct){
+    fb.innerHTML = `<div class="feedback ok">✅ Benar! Kamu memahami konsep ini. <br><span style="font-weight:400;">${q.exp}</span></div>`;
+    state.cekAnswered[i]=true; saveState();
+    markCekDone(i,q,true);
+  } else {
+    fb.innerHTML = `<div class="feedback no">❌ Belum tepat. Coba perhatikan kembali bagian materi tentang ini, lalu coba lagi.</div>`;
+  }
+}
+function markCekDone(i,q,disable){
+  const area = document.getElementById('cekArea'+i);
+  if(!area) return;
+  area.querySelectorAll('button').forEach(b=>b.disabled=true);
+}
+
+/* ============================================================
+   MISI 3 — GAMES
+   ============================================================ */
+let memState = {cards:[], flipped:[], matched:[], tries:0, score:0};
+let sortState = {selected:null, placed:{}};
+
+function initGame3(){
+  buildMemory();
+  buildSorting();
+  document.getElementById('memDone').classList.toggle('hidden', memState.matched.length !== MEM_PAIRS.length*2);
+  document.getElementById('sortDone').classList.toggle('hidden', Object.keys(state.sortPlaced).length !== SORT_ITEMS.length);
+  checkMisi3Complete();
+  document.getElementById('diskusi1').value = state.diskusi.d1||'';
+  document.getElementById('diskusi2').value = state.diskusi.d2||'';
+}
+function buildMemory(){
+  let cards = [];
+  MEM_PAIRS.forEach((p,i)=>{ cards.push({id:'a'+i,label:p.a,pair:i}); cards.push({id:'b'+i,label:p.b,pair:i}); });
+  cards.sort(()=>Math.random()-0.5);
+  memState.cards = cards; memState.flipped=[]; memState.matched = state.memMatched.slice();
+  memState.tries=0; memState.score = memState.matched.length/2*10;
+  renderMemory();
+}
+function renderMemory(){
+  const grid = document.getElementById('memGrid');
+  grid.innerHTML='';
+  memState.cards.forEach((c,idx)=>{
+    const matched = memState.matched.includes(c.id);
+    const flipped = memState.flipped.includes(idx) || matched;
+    const div = document.createElement('div');
+    div.className = 'mem-card' + (flipped?' flipped':'') + (matched?' matched':'');
+    div.textContent = flipped ? c.label : '❓';
+    if(!matched) div.onclick=()=>flipCard(idx);
+    grid.appendChild(div);
+  });
+  document.getElementById('memScore').textContent = '⭐ Skor: '+memState.score;
+  document.getElementById('memTries').textContent = '🔁 Percobaan: '+memState.tries;
+}
+function flipCard(idx){
+  if(memState.flipped.includes(idx) || memState.flipped.length>=2) return;
+  memState.flipped.push(idx);
+  renderMemory();
+  if(memState.flipped.length===2){
+    memState.tries++;
+    const [i1,i2] = memState.flipped;
+    const c1=memState.cards[i1], c2=memState.cards[i2];
+    setTimeout(()=>{
+      if(c1.pair===c2.pair && c1.id!==c2.id){
+        memState.matched.push(c1.id,c2.id);
+        state.memMatched = memState.matched; saveState();
+        memState.score += 10;
+        toast('✅ Pasangan ditemukan!');
+        if(memState.matched.length===memState.cards.length){
+          document.getElementById('memDone').classList.remove('hidden');
+          checkMisi3Complete();
+        }
+      }
+      memState.flipped=[];
+      renderMemory();
+    }, 700);
+  }
+}
+
+function buildSorting(){
+  sortState.placed = Object.assign({}, state.sortPlaced);
+  const pool = document.getElementById('sortPool');
+  pool.innerHTML='';
+  SORT_ITEMS.forEach(it=>{
+    const placed = !!sortState.placed[it.name];
+    const el = document.createElement('div');
+    el.className = 'sort-item' + (placed?' placed':'');
+    el.textContent = it.name;
+    el.onclick = ()=>{
+      if(placed) return;
+      document.querySelectorAll('.sort-item').forEach(s=>s.classList.remove('selected'));
+      el.classList.add('selected');
+      sortState.selected = it.name;
+    };
+    pool.appendChild(el);
+  });
+  const cats = document.getElementById('sortCats');
+  cats.innerHTML='';
+  SORT_CATS.forEach(cat=>{
+    const div = document.createElement('div');
+    div.className='sort-cat';
+    const placedItems = SORT_ITEMS.filter(it=>sortState.placed[it.name]===cat);
+    div.innerHTML = `<h4>${cat}</h4><div class="placed-list">${placedItems.map(it=>`<span>${it.name}</span>`).join('')}</div>`;
+    div.onclick=()=>{
+      if(!sortState.selected) { toast('Pilih bahan dulu, lalu ketuk kategori.'); return; }
+      const item = SORT_ITEMS.find(it=>it.name===sortState.selected);
+      if(item.cat===cat){
+        sortState.placed[item.name]=cat;
+        state.sortPlaced = sortState.placed; saveState();
+        toast('✅ Tepat!');
+      } else {
+        toast('❌ Belum tepat, coba kategori lain.');
+      }
+      sortState.selected=null;
+      buildSorting();
+      if(Object.keys(sortState.placed).length===SORT_ITEMS.length){
+        document.getElementById('sortDone').classList.remove('hidden');
+        checkMisi3Complete();
+      }
+    };
+    cats.appendChild(div);
+  });
+}
+function checkMisi3Complete(){
+  const memOk = memState.matched.length === MEM_PAIRS.length*2;
+  const sortOk = Object.keys(state.sortPlaced).length === SORT_ITEMS.length;
+  if(memOk && sortOk){
+    unlockBadge('gameMaster');
+    document.getElementById('btnMisi3Lanjut').disabled=false;
+  }
+}
+function saveDiskusi(){
+  state.diskusi.d1 = document.getElementById('diskusi1').value;
+  state.diskusi.d2 = document.getElementById('diskusi2').value;
+  saveState(); toast('Jawaban diskusi disimpan.');
+}
+const origCompleteMisi3 = completeMisi;
+function completeMisi3Wrap(){ addXP(CONFIG.xp.game); completeMisi(3); }
+document.getElementById('btnMisi3Lanjut').onclick = completeMisi3Wrap;
+
+/* ============================================================
+   MISI 4 — PRAKTIK
+   ============================================================ */
+function initPraktikUI(){
+  document.getElementById('praktikStart').classList.toggle('hidden', !!state.misiDone[4] || praktikStarted);
+  document.getElementById('praktikFinish').classList.toggle('hidden', !praktikStarted);
+}
+let praktikStarted=false;
+function startPraktik(){
+  praktikStarted=true;
+  document.getElementById('praktikStart').classList.add('hidden');
+  document.getElementById('praktikFinish').classList.remove('hidden');
+  toast('Semangat praktik! 🔨');
+}
+function finishPraktik(){
+  unlockBadge('doer');
+  addXP(CONFIG.xp.praktik);
+  toast('🎉 Misi Praktik Berhasil!');
+  completeMisi(4);
+}
+
+/* ============================================================
+   MISI 5 — CHALLENGE BOSS (susun urutan)
+   ============================================================ */
+let boss = {lives:3, score:0, seconds:0, placed:[], pool:[], timer:null};
+function initBoss(){
+  boss = {lives:3, score:0, seconds:0, placed:[], pool: BOSS_SEQ.slice().sort(()=>Math.random()-0.5), timer:null};
+  renderBoss();
+  document.getElementById('bossWin').classList.add('hidden');
+  document.getElementById('bossHint').classList.add('hidden');
+  if(boss.timer) clearInterval(boss.timer);
+  boss.timer = setInterval(()=>{ boss.seconds++; document.getElementById('bossTime').textContent='⏱️ Waktu: '+boss.seconds+' dtk'; }, 1000);
+}
+function renderBoss(){
+  document.getElementById('bossLives').textContent = '❤️ Nyawa: '+boss.lives;
+  document.getElementById('bossScore').textContent = '⭐ Skor: '+boss.score;
+  const slots = document.getElementById('bossSlots');
+  slots.innerHTML='';
+  for(let i=0;i<BOSS_SEQ.length;i++){
+    const s=document.createElement('div');
+    s.className='seq-slot'+(boss.placed[i]?' filled':'');
+    s.textContent = boss.placed[i] ? (i+1)+'. '+boss.placed[i] : (i+1)+'. ?';
+    slots.appendChild(s);
+  }
+  const pool = document.getElementById('bossPool');
+  pool.innerHTML='';
+  boss.pool.forEach(label=>{
+    const b=document.createElement('button');
+    b.className='sort-item'; b.textContent=label;
+    b.onclick=()=>bossPick(label);
+    pool.appendChild(b);
+  });
+}
+function bossPick(label){
+  const nextIdx = boss.placed.length;
+  if(BOSS_SEQ[nextIdx]===label){
+    boss.placed.push(label);
+    boss.pool = boss.pool.filter(l=>l!==label);
+    boss.score += 15;
+    document.getElementById('bossHint').classList.add('hidden');
+    renderBoss();
+    if(boss.placed.length===BOSS_SEQ.length){
+      clearInterval(boss.timer);
+      document.getElementById('bossWin').classList.remove('hidden');
+      launchConfetti();
+      unlockBadge('bossSlayer');
+      addXP(CONFIG.xp.boss);
+      setTimeout(()=>completeMisi(5), 1400);
+    }
+  } else {
+    boss.lives--; renderBoss();
+    const hint = document.getElementById('bossHint');
+    hint.textContent = '❌ Belum tepat. Petunjuk: urutan dimulai dari menyiapkan bahan terlebih dahulu.';
+    hint.classList.remove('hidden');
+    if(boss.lives<=0){
+      clearInterval(boss.timer);
+      hint.textContent = '💔 Nyawa habis! Coba lagi dari awal.';
+      setTimeout(()=>initBoss(), 1600);
+    }
+  }
+}
+
+/* ============================================================
+   FINAL MISSION
+   ============================================================ */
+let fin = {placed:[], pool:[]};
+function initFinal(){
+  fin = {placed:[], pool: FINAL_SEQ.slice().sort(()=>Math.random()-0.5)};
+  renderFinal();
+  document.getElementById('finalQ').classList.add('hidden');
+  document.getElementById('finalHint').classList.add('hidden');
+}
+function renderFinal(){
+  const slots = document.getElementById('finalSlots');
+  slots.innerHTML='';
+  for(let i=0;i<FINAL_SEQ.length;i++){
+    const s=document.createElement('div');
+    s.className='seq-slot'+(fin.placed[i]?' filled':'');
+    s.textContent = fin.placed[i] ? (i+1)+'. '+fin.placed[i] : (i+1)+'. ?';
+    slots.appendChild(s);
+  }
+  const pool = document.getElementById('finalPool');
+  pool.innerHTML='';
+  fin.pool.forEach(label=>{
+    const b=document.createElement('button');
+    b.className='sort-item'; b.textContent=label;
+    b.onclick=()=>finalPick(label);
+    pool.appendChild(b);
+  });
+}
+function finalPick(label){
+  const nextIdx = fin.placed.length;
+  if(FINAL_SEQ[nextIdx]===label){
+    fin.placed.push(label);
+    fin.pool = fin.pool.filter(l=>l!==label);
+    renderFinal();
+    if(fin.placed.length===FINAL_SEQ.length){
+      document.getElementById('finalQ').classList.remove('hidden');
+    }
+  } else {
+    const hint = document.getElementById('finalHint');
+    hint.textContent = '❌ Belum tepat. Ingat lima tahap: Pembahanan → Pembentukan → Perakitan → Finishing → Evaluasi.';
+    hint.classList.remove('hidden');
+  }
+}
+function finishFinal(){
+  state.finalDone = true; saveState();
+  unlockBadge('learningMaster');
+  addXP(CONFIG.xp.final);
+  launchConfetti();
+  toast('🎉 Final Mission selesai!');
+  renderResult();
+  showScreen('screen-result');
+}
+
+/* ============================================================
+   REFLEKSI
+   ============================================================ */
+document.getElementById('ratingRow').addEventListener('click', e=>{
+  if(e.target.tagName==='BUTTON'){
+    document.querySelectorAll('#ratingRow button').forEach(b=>b.classList.remove('sel'));
+    e.target.classList.add('sel');
+    state.refleksi.rating = parseInt(e.target.dataset.v);
+  }
+});
+document.getElementById('emojiRow').addEventListener('click', e=>{
+  if(e.target.tagName==='BUTTON'){
+    document.querySelectorAll('#emojiRow button').forEach(b=>b.classList.remove('sel'));
+    e.target.classList.add('sel');
+    state.refleksi.emoji = e.target.dataset.v;
+  }
+});
+function saveRefleksi(){
+  state.refleksi.r1=document.getElementById('ref1').value;
+  state.refleksi.r2=document.getElementById('ref2').value;
+  state.refleksi.r3=document.getElementById('ref3').value;
+  state.refleksi.r4=document.getElementById('ref4').value;
+  state.refleksi.r5=document.getElementById('ref5').value;
+  saveState();
+  addXP(CONFIG.xp.refleksi);
+  toast('💭 Refleksi tersimpan. Terima kasih!');
+  completeMisi(6);
+}
+
+/* ============================================================
+   RESULT / BADGES / CERT
+   ============================================================ */
+function renderResult(){
+  document.getElementById('resXp').textContent = state.xp;
+  document.getElementById('resLevel').textContent = CONFIG.levels.indexOf(currentLevel())+1;
+  document.getElementById('resBadges').textContent = state.badges.length;
+  const grid = document.getElementById('badgeGrid');
+  grid.innerHTML='';
+  BADGES.forEach(b=>{
+    const unlocked = state.badges.includes(b.id);
+    const div=document.createElement('div');
+    div.className='badge-item'+(unlocked?' unlocked':'');
+    div.innerHTML = `<div class="bi">${b.icon}</div><div class="bn">${b.name}</div><div class="bd">${b.desc}</div>`;
+    grid.appendChild(div);
+  });
+  document.getElementById('certName').textContent = state.name || '___________________';
+  document.getElementById('siswaNama').value = state.name||'';
+}
+function setCertName(){
+  state.name = document.getElementById('siswaNama').value.trim();
+  saveState();
+  document.getElementById('certName').textContent = state.name || '___________________';
+  toast('Nama disimpan.');
+}
+
+/* ============================================================
+   UI HELPERS: toast, modal, confetti, fullscreen, guru mode
+   ============================================================ */
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  clearTimeout(toast._t);
+  toast._t=setTimeout(()=>t.classList.remove('show'), 2200);
+}
+function launchConfetti(){
+  const colors=['#C97A3D','#3D6B57','#4A7A96','#B4483A'];
+  for(let i=0;i<40;i++){
+    const c=document.createElement('div');
+    c.className='confetti';
+    c.style.left=Math.random()*100+'vw';
+    c.style.background=colors[Math.floor(Math.random()*colors.length)];
+    c.style.transform='rotate('+Math.random()*360+'deg)';
+    document.body.appendChild(c);
+    const dur=1800+Math.random()*1200;
+    c.animate([{transform:'translateY(0) rotate(0deg)',opacity:1},{transform:'translateY(100vh) rotate(360deg)',opacity:0}], {duration:dur, easing:'ease-in'});
+    setTimeout(()=>c.remove(), dur);
+  }
+}
+document.getElementById('btnFullscreen').onclick=()=>{
+  if(!document.fullscreenElement) document.documentElement.requestFullscreen().catch(()=>{});
+  else document.exitFullscreen();
+};
+let guruMode=false;
+document.getElementById('btnGuru').onclick=()=>{
+  guruMode=!guruMode;
+  const p=document.getElementById('guruPanel1');
+  if(p) p.style.display = guruMode?'block':'none';
+  toast(guruMode?'🎓 Mode Guru aktif':'Mode Guru nonaktif');
+};
+
+/* reset */
+function openModal(){ document.getElementById('modal-overlay').classList.add('show'); }
+function closeModal(){ document.getElementById('modal-overlay').classList.remove('show'); }
+document.getElementById('btnReset').onclick=openModal;
+document.getElementById('btnResetFinal').onclick=openModal;
+document.getElementById('modalCancel').onclick=closeModal;
+document.getElementById('modalConfirm').onclick=()=>{
+  localStorage.removeItem('misiKerajinan');
+  state = JSON.parse(JSON.stringify(DEFAULT_STATE));
+  closeModal();
+  toast('Progress dihapus.');
+  showScreen('screen-landing');
+  document.getElementById('welcomeBack').classList.add('hidden');
+};
+
+/* ============================================================
+   INIT
+   ============================================================ */
+document.getElementById('btnMulai').onclick=()=>{ showScreen('screen-map'); };
+document.getElementById('btnLanjutkan').onclick=()=>{
+  const last = state.lastScreen||'screen-map';
+  if(last.startsWith('screen-misi')){ openMisi(parseInt(last.replace('screen-misi',''))); }
+  else showScreen(last==='screen-landing' ? 'screen-map' : last);
+};
+document.getElementById('btnMulaiAwal').onclick=openModal;
+
+(function init(){
+  updateHUD();
+  if(state.lastScreen && state.lastScreen!=='screen-landing' && (state.xp>0 || Object.values(state.misiDone).some(v=>v))){
+    document.getElementById('welcomeBack').classList.remove('hidden');
+    const misiLabel = state.lastScreen.startsWith('screen-misi') ? 'Misi '+state.lastScreen.replace('screen-misi','') : (state.lastScreen==='screen-final'?'Final Mission':'Peta Belajar');
+    document.getElementById('lastMisiLabel').textContent = misiLabel;
+  }
+  if(state.finalDone){ renderResult(); }
+})();
+</script>
+</body>
+</html>
